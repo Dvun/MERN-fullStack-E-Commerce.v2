@@ -7,6 +7,7 @@ import Message from './Message'
 import Users from './Users'
 import ModalWindow from './ModalWindow'
 import ModalWindowAdmin from './ModalWindowAdmin'
+import CategoryItem from './CategoryItem'
 
 export {
   Header,
@@ -17,5 +18,6 @@ export {
   Message,
   Users,
   ModalWindow,
-  ModalWindowAdmin
+  ModalWindowAdmin,
+  CategoryItem
 }

@@ -6,8 +6,8 @@ const {addCategory, categoryById, editCategory, deleteCategory, getAllCategories
 
 
 
-router.post('/category/add-category', categoryValidator, verifyToken, isAdmin, addCategory)
-router.put('/category/edit-category/:id', verifyToken, isAdmin, categoryById, editCategory)
+router.post('/add-category', categoryValidator, verifyToken, isAdmin, addCategory)
+router.put('/category/edit-category/:id', verifyToken, isAdmin, editCategory)
 router.delete('/category/:id', verifyToken, isAdmin, categoryById, deleteCategory)
 router.get('/', getAllCategories)
 

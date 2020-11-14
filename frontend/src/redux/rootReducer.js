@@ -18,7 +18,7 @@ import {
   getAllProductsByAdminReducer
 } from './reducers/productReducers'
 import {
-  getAllCategoriesReducer,
+  CategoriesReducer,
 } from './reducers/categoryReducers'
 
 
@@ -38,7 +38,7 @@ const rootReducer = combineReducers({
   updateProductByUserReducer,
   getAllProductsByAdminReducer,
 
-  getAllCategoriesReducer,
+  CategoriesReducer,
   createNewProductByUserReducer
 })
 

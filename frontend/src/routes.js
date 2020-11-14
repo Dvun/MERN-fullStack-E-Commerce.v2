@@ -13,6 +13,7 @@ const UserProfileEditByAdminScreen = lazy(() => import('./screens/UserProfileEdi
 const ProductsListScreen = lazy(() => import('./screens/ProductsListScreen'))
 const ProductEditScreen = lazy(() => import('./screens/ProductEditScreen'))
 const ProductsListByAdminScreen = lazy(() => import('./screens/ProductsListByAdminScreen'))
+const CategoriesScreen = lazy(() => import('./screens/CategoriesScreen'))
 
 
 const Routes = () => {
@@ -29,6 +30,7 @@ const Routes = () => {
       <Route path='/my-products/:id/edit' component={ProductEditScreen}/>
 
       <Route path='/admin/all-users' component={UsersScreen} exact/>
+      <Route path='/admin/all-categories' component={CategoriesScreen}/>
       <Route path='/admin/all-users/user/:id' component={UserProfileEditByAdminScreen}/>
       <Route path='/admin/all-products' component={ProductsListByAdminScreen}/>
     </Switch>

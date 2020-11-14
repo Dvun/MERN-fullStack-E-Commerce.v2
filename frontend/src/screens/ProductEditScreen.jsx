@@ -34,7 +34,7 @@ const ProductEditScreen = ({history, match}) => {
   const [uploading, setUploading] = useState(false)
   const [loadedPicture, setLoadedPicture] = useState({})
   const {register, handleSubmit, errors, reset} = useForm()
-  const {categories} = useSelector(({getAllCategoriesReducer}) => getAllCategoriesReducer)
+  const {categories} = useSelector(({CategoriesReducer}) => CategoriesReducer)
   const {product} = useSelector(({getProductDetailsReducer}) => getProductDetailsReducer)
   const {userInfo} = useSelector(({userLoginReducer}) => userLoginReducer)
   const {success} = useSelector(({createNewProductByUserReducer}) => createNewProductByUserReducer)
@@ -134,7 +134,7 @@ const ProductEditScreen = ({history, match}) => {
   }
 
   return (
-    <Layout title='Product Editor' description='Edit your products!'>
+    <Layout title='Product Editor' description='Edit your products! If You need some Category what have no in list, please write to admin@shop.com'>
       <Container>
         <Button className='btn btn-light btn-outline-dark' onClick={handleBack}>
           <FontAwesomeIcon icon={faArrowLeft}/> Products list

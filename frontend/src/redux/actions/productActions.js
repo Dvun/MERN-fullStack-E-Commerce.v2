@@ -82,7 +82,7 @@ export const getAllUsersProductsByAdmin = () => async (dispatch, getState) => {
     const res = await axios.get('/api/products/admin', config)
     dispatch({type: consts.USERS_PRODUCTS_BY_ADMIN_SUCCESS, payload: res.data})
   } catch (e) {
-    dispatch({type: consts.USERS_PRODUCTS_BY_ADMIN_FAIL, payload: e.response.data})
+    // dispatch({type: consts.USERS_PRODUCTS_BY_ADMIN_FAIL, payload: e.response.data})
   }
 }
 export const deleteProductByAdmin = (id) => async (dispatch, getState) => {

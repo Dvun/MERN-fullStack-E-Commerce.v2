@@ -38,10 +38,11 @@ const ModalWindow = (props) => {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        {props.count === undefined || props.count === 0 ?
-          <Button onClick={deleteHandler} className='btn btn-danger'>Delete</Button>
-          :
-          null
+        {
+          props.count === undefined || props.count === 0 ?
+            <Button onClick={deleteHandler} className='btn btn-danger'>Delete</Button>
+            :
+            null
         }
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>

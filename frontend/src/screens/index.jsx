@@ -8,6 +8,7 @@ import UsersScreen from './UsersScreen'
 import ProductsListScreen from './ProductsListScreen'
 import ProductEditScreen from './ProductEditScreen'
 import UserProfileEditByAdminScreen from './UserProfileEditByAdminScreen'
+import CategoriesScreen from './CategoriesScreen'
 
 export {
   LoginScreen,
@@ -19,5 +20,6 @@ export {
   UsersScreen,
   ProductsListScreen,
   ProductEditScreen,
-  UserProfileEditByAdminScreen
+  UserProfileEditByAdminScreen,
+  CategoriesScreen
 }
