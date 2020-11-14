@@ -1,11 +1,11 @@
 import * as consts from '../constants/categoryConstants'
-import {DELETE_CATEGORY_FAIL} from '../constants/categoryConstants'
-import {UPDATE_PRODUCT_FAIL} from '../constants/productConstants'
+import {CLEAR_FILTER, FILTERING} from '../constants/filterConstants'
 
 
 const initialState = {
   isLoading: false,
   categories: [],
+  filteredCategories: null,
   categoryErrorMessage: null,
   categorySuccessMessage: null,
   success: false
@@ -23,7 +23,8 @@ export const CategoriesReducer = (state = initialState, action) => {
     case consts.GET_ALL_CATEGORIES_SUCCESS:
       return {
         ...state,
-        categories: action.payload
+        categories: action.payload,
+        filteredCategories: null
       }
 
     case consts.ADD_NEW_CATEGORY_SUCCESS:
@@ -50,8 +51,8 @@ export const CategoriesReducer = (state = initialState, action) => {
 
     case consts.GET_ALL_CATEGORIES_FAIL:
     case consts.ADD_NEW_CATEGORY_FAIL:
-    case DELETE_CATEGORY_FAIL:
-    case UPDATE_PRODUCT_FAIL:
+    case consts.DELETE_CATEGORY_FAIL:
+    case consts.UPDATE_CATEGORY_FAIL:
       return {
         ...state,
         isLoading: false,
@@ -65,6 +66,21 @@ export const CategoriesReducer = (state = initialState, action) => {
         categoryErrorMessage: null,
         categorySuccessMessage: null,
         success: false
+      }
+
+    case FILTERING:
+      return {
+        ...state,
+        filteredCategories: state.categories.filter(category => {
+          const regex = RegExp(`${action.payload}`, 'gi')
+          return category.name.match(regex)
+        }),
+      }
+
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filteredCategories: null,
       }
 
     case consts.CLEAR_MESSAGES:

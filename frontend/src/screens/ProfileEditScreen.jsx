@@ -43,8 +43,8 @@ const ProfileEditScreen = ({history}) => {
       address: userData.address || user.address,
       city: userData.city || user.city,
       zip: userData.zip || user.zip,
-      isAdmin: userData.isAdmin,
-      isSeller: userData.isSeller,
+      isAdmin: userData.isAdmin || user.isAdmin,
+      isSeller: userData.isSeller || user.isSeller,
     }
     await dispatch(userUpdateProfile(updateUser))
   }

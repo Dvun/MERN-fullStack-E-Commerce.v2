@@ -8,6 +8,8 @@ import Users from './Users'
 import ModalWindow from './ModalWindow'
 import ModalWindowAdmin from './ModalWindowAdmin'
 import CategoryItem from './CategoryItem'
+import InputFilter from './InputFilter'
+import AddCategoryInput from './AddCategoryInput'
 
 export {
   Header,
@@ -19,5 +21,7 @@ export {
   Users,
   ModalWindow,
   ModalWindowAdmin,
-  CategoryItem
+  CategoryItem,
+  InputFilter,
+  AddCategoryInput
 }

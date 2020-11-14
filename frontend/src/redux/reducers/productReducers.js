@@ -1,4 +1,5 @@
 import * as consts from '../constants/productConstants'
+import {CLEAR_FILTER, FILTERING} from '../constants/filterConstants'
 
 
 export const getAllProductsReducer = (state = {products: []}, action) => {
@@ -62,10 +63,27 @@ export const updateProductByUserReducer = (state = {}, action) => {
     default: return state
   }
 }
-
-export const getAllProductsByAdminReducer = (state = {productsByAdmin: []}, action) => {
+export const getAllProductsByAdminReducer = (state = {productsByAdmin: [], filterProducts: null}, action) => {
   switch (action.type) {
-    case consts.USERS_PRODUCTS_BY_ADMIN_SUCCESS: return {productsByAdmin: action.payload, isLoading: false}
+    case consts.USERS_PRODUCTS_BY_ADMIN_SUCCESS: return {productsByAdmin: action.payload, isLoading: false, filterProducts: null}
+
+    case FILTERING:
+      return {
+        ...state,
+        filterProducts: state.productsByAdmin.filter(product => {
+          const regex = RegExp(`${action.payload}`, 'gi')
+          return product.title.match(regex) ||
+            product.category.name.match(regex) ||
+            product.userId.name.match(regex)
+        }),
+      }
+
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filterProducts: null,
+      }
+
     case consts.USERS_PRODUCTS_BY_ADMIN_FAIL: return {productErrorMessage: action.payload}
     case consts.CLEAR_MESSAGES: return {...state, productErrorMessage: null}
     default: return state

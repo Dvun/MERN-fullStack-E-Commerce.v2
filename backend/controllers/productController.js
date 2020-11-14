@@ -83,7 +83,6 @@ exports.createNewProduct = async (req, res) => {
       }
     }
   } catch (e) {
-    console.log(e)
     res.status(500).json({msg: 'Server error!'})
   }
 }
@@ -174,7 +173,6 @@ const updateProduct = async (req, res) => {
       return res.status(401).json({msg: 'Product not found!'})
     }
   } catch (e) {
-    console.log(e)
     res.status(500).json({msg: 'Server error'})
   }
 }
@@ -186,7 +184,6 @@ const deleteProduct = async (req, res) => {
       const folder = path.join(path.resolve(), '/uploads')
       fs.unlink(`${folder}/${product.fileName}`, (err) => {
         if (!err) {
-          console.log('file deleted!')
         } else {
           console.log(err)
         }

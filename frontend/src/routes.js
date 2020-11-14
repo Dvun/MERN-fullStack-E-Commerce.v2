@@ -14,6 +14,7 @@ const ProductsListScreen = lazy(() => import('./screens/ProductsListScreen'))
 const ProductEditScreen = lazy(() => import('./screens/ProductEditScreen'))
 const ProductsListByAdminScreen = lazy(() => import('./screens/ProductsListByAdminScreen'))
 const CategoriesScreen = lazy(() => import('./screens/CategoriesScreen'))
+const CartScreen = lazy(() => import('./screens/CartScreen'))
 
 
 const Routes = () => {
@@ -28,6 +29,7 @@ const Routes = () => {
       <Route path='/my-products' component={ProductsListScreen} exact/>
       <Route path='/my-products/add' component={ProductEditScreen} exact/>
       <Route path='/my-products/:id/edit' component={ProductEditScreen}/>
+      <Route path='/cart' component={CartScreen}/>
 
       <Route path='/admin/all-users' component={UsersScreen} exact/>
       <Route path='/admin/all-categories' component={CategoriesScreen}/>
