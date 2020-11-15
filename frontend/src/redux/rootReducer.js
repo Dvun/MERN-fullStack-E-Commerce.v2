@@ -20,7 +20,7 @@ import {
 import {
   CategoriesReducer,
 } from './reducers/categoryReducers'
-import {CartReducer} from './reducers/cartReducers'
+import {cartReducer} from './reducers/cartReducer'
 
 
 const rootReducer = combineReducers({
@@ -42,7 +42,7 @@ const rootReducer = combineReducers({
   CategoriesReducer,
   createNewProductByUserReducer,
 
-  CartReducer
+  cartReducer
 })
 
 

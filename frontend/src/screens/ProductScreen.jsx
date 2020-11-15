@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Card, Row, Col, Image, ListGroup, ListGroupItem, Button, Form, Container} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import {getProductDetails} from '../redux/actions/productActions'
@@ -9,17 +9,17 @@ import {faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 
-const ProductScreen = ({match}) => {
+const ProductScreen = ({match, history}) => {
   const dispatch = useDispatch()
+  const [qty, setQty] = useState(1)
   const {product} = useSelector(({getProductDetailsReducer}) => getProductDetailsReducer)
 
   useEffect(() => {
     dispatch(getProductDetails(match.params.id))
   }, [dispatch, match])
 
-
   const addToCartHandler = () => {
-
+    history.push(`/cart/${match.params.id}?qty=${qty}`)
   }
 
   return (
@@ -74,7 +74,7 @@ const ProductScreen = ({match}) => {
                     <Row>
                       <Col>Qty</Col>
                       <Col>
-                        <Form.Control as='select'>
+                        <Form.Control as='select' value={qty} onChange={(e) => setQty(Number(e.target.value))}>
                           {
                             [...Array(product.countInStock).keys()].map(x => (
                               <option key={x + 1} value={x + 1}>{x + 1}</option>

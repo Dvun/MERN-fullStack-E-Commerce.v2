@@ -19,10 +19,13 @@ import {userLogout} from '../redux/actions/userActions'
 const Header = () => {
   const dispatch = useDispatch()
   const {userInfo} = useSelector(({userLoginReducer}) => userLoginReducer)
+  const {cartItems} = useSelector(({cartReducer}) => cartReducer)
 
   const logoutHandler = () => {
     dispatch(userLogout())
   }
+
+  const itemsCount = cartItems.reduce((acc, item) => acc + Number(item.qty), 0)
 
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
@@ -43,7 +46,7 @@ const Header = () => {
               <Nav.Link>
                 <FontAwesomeIcon icon={faShoppingCart}/>
                 <sup>
-                  <small className='badge bg-primary rounded-circle text-white'>15</small>
+                  <small className='badge bg-primary rounded-circle text-white'>{itemsCount}</small>
                 </sup>
               </Nav.Link>
             </LinkContainer>
