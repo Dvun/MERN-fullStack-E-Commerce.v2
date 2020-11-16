@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {Row, Form, Col, ListGroup, ListGroupItem, Image, Card, Container} from 'react-bootstrap'
+import {Row, Col, ListGroup, ListGroupItem, Image, Card, Container} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import Message from '../components/Message'
 import {useDispatch, useSelector} from 'react-redux'
@@ -7,9 +7,14 @@ import {addToCart, removeItemFromCart} from '../redux/actions/cartActions'
 import Button from '@material-ui/core/Button'
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded'
 import {makeStyles} from '@material-ui/styles'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
 
 
-const CartScreen = ({match, location, history}) => {
+const CartScreen = ({match, location}) => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const prodId = match.params.id
@@ -38,10 +43,10 @@ const CartScreen = ({match, location, history}) => {
             </Message>
             :
             (
-              <ListGroup variant='flush'>
+              <List variant='flush'>
                 {cartItems && cartItems.map(item => (
                   <ListGroupItem key={item._id}>
-                    <Row className='d-flex align-items-center'>
+                    <ListItem className='d-flex align-items-center'>
                       <Col md={2}>
                         <Image src={`${window.location.origin}/${item.image}`} alt={item.title} fluid rounded/>
                       </Col>
@@ -50,27 +55,31 @@ const CartScreen = ({match, location, history}) => {
                       </Col>
                       <Col md={2}>€ {item.price}</Col>
                       <Col md={2}>
-                        <Form.Control
-                          as='select'
-                          value={item.qty}
-                          onChange={(e) => dispatch(addToCart(item._id,
-                            Number(e.target.value)))}>
-                          {
-                            [...Array(item.countInStock).keys()].map(x => (
-                              <option key={x + 1} value={x + 1}>{x + 1}</option>
-                            ))
-                          }
-                        </Form.Control>
+                        <FormControl variant="outlined" size='small'>
+                          <Select
+                            value={item && item.qty}
+                            onChange={(e) => dispatch(addToCart(item._id, Number(e.target.value)))}>
+                          >
+                            <MenuItem value="" disabled>
+                              <em>Quantity</em>
+                            </MenuItem>
+                            {
+                              [...Array(item.countInStock).keys()].map(x => (
+                                <MenuItem key={x + 1} value={x + 1} className={classes.selectMenu}>{x + 1}</MenuItem>
+                              ))
+                            }
+                          </Select>
+                        </FormControl>
                       </Col>
                       <Col md={2}>
                         <Button type='button' variant='text' onClick={() => removeFromCartHandler(item._id)}>
                           <DeleteRoundedIcon className={classes.trashIcon}/>
                         </Button>
                       </Col>
-                    </Row>
+                    </ListItem>
                   </ListGroupItem>
                 ))}
-              </ListGroup>
+              </List>
             )}
         </Col>
 
@@ -85,9 +94,9 @@ const CartScreen = ({match, location, history}) => {
               </ListGroupItem>
               <ListGroupItem>
                 <Button
+                  fullWidth
                   type='button'
                   color='primary'
-                  className='btn btn-block'
                   variant='contained'
                   disabled={cartItems.length === 0}>
                   Process To Checkout
@@ -101,7 +110,7 @@ const CartScreen = ({match, location, history}) => {
   )
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   trashIcon: {
     fontSize: '1.5rem',
     color: 'black',
@@ -109,7 +118,12 @@ const useStyles = makeStyles({
     '&:hover': {
       color: 'darkred',
     },
+  },
+  selectMenu: {
+    height: '2rem'
   }
-})
+}))
+
+
 
 export default CartScreen

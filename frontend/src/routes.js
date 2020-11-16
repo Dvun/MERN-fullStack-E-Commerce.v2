@@ -30,7 +30,6 @@ const Routes = () => {
       <Route path='/my-products/add' component={ProductEditScreen} exact/>
       <Route path='/my-products/:id/edit' component={ProductEditScreen}/>
       <Route path='/cart' component={CartScreen} exact/>
-      <Route path='/cart/:id' component={CartScreen}/>
 
       <Route path='/admin/all-users' component={UsersScreen} exact/>
       <Route path='/admin/all-categories' component={CategoriesScreen}/>

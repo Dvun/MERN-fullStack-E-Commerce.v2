@@ -42,11 +42,13 @@ const Header = () => {
           </Nav>
           <Nav>
             {userInfo &&
-            <LinkContainer to="/cart" className='mr-2'>
+            <LinkContainer to="/cart" className='mr-2 position-relative'>
               <Nav.Link>
                 <FontAwesomeIcon icon={faShoppingCart}/>
                 <sup>
-                  <small className='badge bg-primary rounded-circle text-white'>{itemsCount}</small>
+                  <small style={{top: '0', right: '-10px'}}
+                    className='badge bg-danger rounded-circle text-white d-flex justify-content-center position-absolute'
+                  >{itemsCount}</small>
                 </sup>
               </Nav.Link>
             </LinkContainer>
