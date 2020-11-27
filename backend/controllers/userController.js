@@ -4,7 +4,7 @@ const {generatedToken} = require('../middlewares/authMiddleware')
 
 exports.registerUser = async (req, res) => {
   try {
-    const {name, surname, email, password, address, city, zip} = req.body
+    const {name, surname, email, password, address, city, postalCode, country} = req.body
     let existUser = await User.findOne({email})
     if (existUser) {
       return res.status(422).send({msg: `User with email: ${email} already exist`})
@@ -16,7 +16,8 @@ exports.registerUser = async (req, res) => {
       password,
       address,
       city,
-      zip,
+      postalCode,
+      country
     })
     res.status(201).json({msg: 'User registered, now You can Login!'})
     user.save()
@@ -39,7 +40,8 @@ exports.loginUser = async (req, res) => {
         email: user.email,
         address: user.address,
         city: user.city,
-        zip: user.zip,
+        postalCode: user.postalCode,
+        country: user.country,
         productsCount: user.productsCount,
         isAdmin: user.isAdmin,
         isSeller: user.isSeller,
@@ -65,7 +67,7 @@ exports.findUserById = async (req, res) => {
         email: user.email,
         address: user.address,
         city: user.city,
-        zip: user.zip,
+        postalCode: user.postalCode,
         isAdmin: user.isAdmin,
         isSeller: user.isSeller,
       })
@@ -111,7 +113,7 @@ exports.getUserProfile = async (req, res) => {
         email: user.email,
         address: user.address,
         city: user.city,
-        zip: user.zip,
+        postalCode: user.postalCode,
         isAdmin: user.isAdmin,
         isSeller: user.isSeller,
       })
@@ -134,7 +136,6 @@ exports.deleteUserProfile = async (req, res) => {
 
 
 const findAndUpdateUser = async (req, res) => {
-  console.log(req.body)
   const user = await User.findById(req.body._id)
   if (user) {
     user.name = req.body.name || user.name
@@ -142,7 +143,8 @@ const findAndUpdateUser = async (req, res) => {
     user.email = req.body.email || user.email
     user.address = req.body.address || user.address
     user.city = req.body.city || user.city
-    user.zip = req.body.zip || user.zip
+    user.postalCode = req.body.postalCode || user.postalCode
+    user.country = req.body.country || user.country
     user.isAdmin = req.body.isAdmin
     user.isSeller = req.body.isSeller
     if (req.body.password) {
@@ -156,7 +158,8 @@ const findAndUpdateUser = async (req, res) => {
       email: updatedUser.email,
       address: updatedUser.address,
       city: updatedUser.city,
-      zip: updatedUser.zip,
+      postalCode: updatedUser.postalCode,
+      country: updatedUser.country,
       isAdmin: updatedUser.isAdmin,
       isSeller: updatedUser.isSeller,
       token: generatedToken(updatedUser._id),

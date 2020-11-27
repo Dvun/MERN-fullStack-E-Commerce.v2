@@ -1,23 +1,21 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Row, Col, ListGroup, ListGroupItem, Image, Card, Container} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import Message from '../components/Message'
 import {useDispatch, useSelector} from 'react-redux'
-import {addToCart, removeItemFromCart} from '../redux/actions/cartActions'
-import Button from '@material-ui/core/Button'
+import {addToCart, removeItemFromCart, savePaymentMethod} from '../redux/actions/cartActions'
+import {Button, List, ListItem, FormControl, MenuItem, Select, Typography} from '@material-ui/core'
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded'
-import {makeStyles} from '@material-ui/styles'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
+import {makeStyles} from '@material-ui/core/styles'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Radio from '@material-ui/core/Radio'
 
 
-const CartScreen = ({match, location}) => {
+const CartScreen = ({match, location, history}) => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const prodId = match.params.id
+  const [paymentMethod, setPaymentMethod] = useState('')
   const qty = location.search ? location.search.split('=')[1] : 1
   const {cartItems} = useSelector(({cartReducer}) => cartReducer)
 
@@ -29,6 +27,11 @@ const CartScreen = ({match, location}) => {
 
   const removeFromCartHandler = (id) => {
     dispatch(removeItemFromCart(id))
+  }
+
+  const placeOrderHandler = () => {
+    dispatch(savePaymentMethod(paymentMethod))
+    history.push('/placeorder')
   }
 
   return (
@@ -59,13 +62,13 @@ const CartScreen = ({match, location}) => {
                           <Select
                             value={item && item.qty}
                             onChange={(e) => dispatch(addToCart(item._id, Number(e.target.value)))}>
-                          >
+                            >
                             <MenuItem value="" disabled>
                               <em>Quantity</em>
                             </MenuItem>
                             {
                               [...Array(item.countInStock).keys()].map(x => (
-                                <MenuItem key={x + 1} value={x + 1} className={classes.selectMenu}>{x + 1}</MenuItem>
+                                <MenuItem key={x + 1} value={x + 1}>{x + 1}</MenuItem>
                               ))
                             }
                           </Select>
@@ -83,7 +86,7 @@ const CartScreen = ({match, location}) => {
             )}
         </Col>
 
-        <Col md={4}>
+        <Col md={4} className='pt-2'>
           <Card>
             <ListGroup variant='flush'>
               <ListGroupItem>
@@ -92,25 +95,47 @@ const CartScreen = ({match, location}) => {
                 <strong>€ {cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}</strong>
               </span>
               </ListGroupItem>
+              <ListGroup variant='flush'>
+                <ListItem>
+                  <Typography variant='h6'>Payment method: </Typography>
+                </ListItem>
+                <ListItem>
+                  <FormControlLabel
+                    label={<Image width={150}
+                                  src='https://www.pngkey.com/png/full/4-42382_credit-card-accepted-png-svg-black-and-white.png'
+                                  alt='paypal'/>}
+                    value="PayPal"
+                    name='paymentMethod'
+                    control={
+                      <Radio
+                        disabled={cartItems.length === 0}
+                        color='primary'
+                        onClick={(e) => setPaymentMethod(e.target.value)}
+                      />}
+                  />
+                </ListItem>
+              </ListGroup>
               <ListGroupItem>
                 <Button
                   fullWidth
                   type='button'
                   color='primary'
                   variant='contained'
-                  disabled={cartItems.length === 0}>
+                  onClick={placeOrderHandler}
+                  disabled={cartItems.length === 0 || paymentMethod === ''}>
                   Process To Checkout
                 </Button>
               </ListGroupItem>
             </ListGroup>
           </Card>
         </Col>
+
       </Row>
     </Container>
   )
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   trashIcon: {
     fontSize: '1.5rem',
     color: 'black',
@@ -119,11 +144,7 @@ const useStyles = makeStyles((theme) => ({
       color: 'darkred',
     },
   },
-  selectMenu: {
-    height: '2rem'
-  }
 }))
-
 
 
 export default CartScreen

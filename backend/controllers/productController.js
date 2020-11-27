@@ -36,7 +36,7 @@ exports.getAllProducts = async (req, res) => {
 exports.getProductById = async (req, res) => {
   const {id} = req.params
   try {
-    const product = await Product.findById(id).populate('category')
+    const product = await Product.findById(id).populate('category').populate('user')
     if (product) {
       res.json(product)
     } else {

@@ -5,7 +5,7 @@ import {
   RegisterScreen,
   HomeScreen,
   ShopListScreen,
-  ProductScreen
+  ProductScreen,
 } from './screens/index'
 const ProfileEditScreen = lazy(() => import('./screens/ProfileEditScreen'))
 const UsersScreen = lazy(() => import('./screens/UsersScreen'))
@@ -15,6 +15,10 @@ const ProductEditScreen = lazy(() => import('./screens/ProductEditScreen'))
 const ProductsListByAdminScreen = lazy(() => import('./screens/ProductsListByAdminScreen'))
 const CategoriesScreen = lazy(() => import('./screens/CategoriesScreen'))
 const CartScreen = lazy(() => import('./screens/CartScreen'))
+const PlaceOrderScreen = lazy(() => import('./screens/PlaceOrderScreen'))
+const OrderScreen = lazy(() => import('./screens/OrderScreen'))
+const OrderListByAdminScreen = lazy(() => import('./screens/OrderListByAdminScreen'))
+const OrderListByUserScreen = lazy(() => import('./screens/OrderListByUserScreen'))
 
 
 const Routes = () => {
@@ -30,11 +34,15 @@ const Routes = () => {
       <Route path='/my-products/add' component={ProductEditScreen} exact/>
       <Route path='/my-products/:id/edit' component={ProductEditScreen}/>
       <Route path='/cart' component={CartScreen} exact/>
+      <Route path='/placeorder' component={PlaceOrderScreen}/>
+      <Route path='/orders/:id' component={OrderScreen}/>
+      <Route path='/my-orders' component={OrderListByUserScreen}/>
 
       <Route path='/admin/all-users' component={UsersScreen} exact/>
       <Route path='/admin/all-categories' component={CategoriesScreen}/>
       <Route path='/admin/all-users/user/:id' component={UserProfileEditByAdminScreen}/>
       <Route path='/admin/all-products' component={ProductsListByAdminScreen}/>
+      <Route path='/admin/all-orders' component={OrderListByAdminScreen}/>
     </Switch>
   )
 }

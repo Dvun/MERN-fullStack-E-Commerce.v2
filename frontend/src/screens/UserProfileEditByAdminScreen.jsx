@@ -43,7 +43,7 @@ const UserProfileEditByAdminScreen = ({history, match}) => {
       password: userData.password || user.password,
       address: userData.address || user.address,
       city: userData.city || user.city,
-      zip: userData.zip || user.zip,
+      postalCode: userData.postalCode || user.postalCode,
       isAdmin: userData.isAdmin,
       isSeller: userData.isSeller,
     }
@@ -145,12 +145,12 @@ const UserProfileEditByAdminScreen = ({history, match}) => {
               />
             </Form.Group>
 
-            <Form.Group as={Col} controlId='zip'>
-              <Form.Label>Zip</Form.Label>
+            <Form.Group as={Col} controlId='postalCode'>
+              <Form.Label>Postal code</Form.Label>
               <Form.Control
                 type='number'
-                name='zip'
-                defaultValue={data.zip}
+                name='postalCode'
+                defaultValue={data.postalCode}
                 ref={register}
               />
             </Form.Group>

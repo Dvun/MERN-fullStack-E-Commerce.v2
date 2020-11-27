@@ -4,7 +4,7 @@ const cors = require('cors')
 const dotenv = require('dotenv')
 const path = require('path')
 const startDB = require('./config/db')
-const {userRouter, categoryRouter, productRouter, uploadRouter} = require('./routes')
+const {userRouter, categoryRouter, productRouter, uploadRouter, orderRouter} = require('./routes')
 
 
 dotenv.config()
@@ -23,7 +23,11 @@ app.use(cors())
 app.use('/api/users', userRouter)
 app.use('/api/categories', categoryRouter)
 app.use('/api/products', productRouter)
+app.use('/api/orders', orderRouter)
 app.use('/api/uploads', uploadRouter)
+
+//Paypal
+app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID))
 
 
 // Serve static assets in production

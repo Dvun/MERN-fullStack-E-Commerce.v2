@@ -58,7 +58,7 @@ export const userUpdateProfile = (userData) => async (dispatch, getState) => {
 
 
 export const userLogout = () => (dispatch) => {
-  localStorage.removeItem('userInfo')
+  localStorage.clear()
   dispatch({type: consts.USER_LOGOUT})
   dispatch({type: consts.USER_DETAILS_RESET})
 }

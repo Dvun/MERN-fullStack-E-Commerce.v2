@@ -21,6 +21,7 @@ import {
   CategoriesReducer,
 } from './reducers/categoryReducers'
 import {cartReducer} from './reducers/cartReducer'
+import {orderReducers} from './reducers/orderReducers'
 
 
 const rootReducer = combineReducers({
@@ -42,7 +43,9 @@ const rootReducer = combineReducers({
   CategoriesReducer,
   createNewProductByUserReducer,
 
-  cartReducer
+  cartReducer,
+
+  orderReducers
 })
 
 

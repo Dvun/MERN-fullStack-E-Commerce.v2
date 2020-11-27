@@ -23,7 +23,7 @@ router.post('/login', loginValidator, validationMiddleware, loginUser)
 router.post('/register',registerValidator, validationMiddleware, registerUser)
 
 router.route('/:id')
-  .get(verifyToken, isAdmin, findUserById)
+  .get(verifyToken, findUserById)
   .put(verifyToken, isAdmin, updateUserProfileByAdmin)
   .delete(verifyToken, isAdmin, deleteUserProfile)
 

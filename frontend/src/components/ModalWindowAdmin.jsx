@@ -25,6 +25,11 @@ const ModalWindowAdmin = (props) => {
     }
   }
 
+  let someCategory
+  if (props.category && props.category.products === 0) {
+    someCategory = props.category.products
+  }
+
   return (
     <Modal
       {...props}
@@ -48,7 +53,9 @@ const ModalWindowAdmin = (props) => {
       </Modal.Body>
       <Modal.Footer>
         {
-          props.title === 'Product Deleting!' || props.category.products === 0 || props.title === 'Product Deleting!' ?
+          props.title === 'Product Deleting!' ||
+          someCategory === 0
+            ?
 
             isLoading || categoryIsLoading ?
               <Button variant="danger" disabled>

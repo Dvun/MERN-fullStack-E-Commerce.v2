@@ -5,8 +5,14 @@ const itemsFromLocalStorage = localStorage.getItem('cartItems') ?
   :
   []
 
+const paymentMethodFromLocalStorage = localStorage.getItem('paymentMethod') ?
+  JSON.parse(localStorage.getItem('paymentMethod'))
+  :
+  {}
+
 const initialState = {
   cartItems: itemsFromLocalStorage,
+  paymentMethod: paymentMethodFromLocalStorage
 }
 
 export const cartReducer = (state = initialState, action) => {
@@ -24,6 +30,12 @@ export const cartReducer = (state = initialState, action) => {
           ...state,
           cartItems: [...state.cartItems, action.payload],
         }
+      }
+
+    case consts.CART_SAVE_PAYMENT_METHOD:
+      return {
+        ...state,
+        paymentMethod: action.payload
       }
 
     case consts.REMOVE_FROM_CART_ITEM:

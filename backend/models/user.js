@@ -38,7 +38,12 @@ const userSchema = new Schema({
     trim: true,
     required: true
   },
-  zip: {
+  postalCode: {
+    type: String,
+    trim: true,
+    required: true
+  },
+  country: {
     type: String,
     trim: true,
     required: true

@@ -42,7 +42,7 @@ const ProfileEditScreen = ({history}) => {
       password: userData.password || user.password,
       address: userData.address || user.address,
       city: userData.city || user.city,
-      zip: userData.zip || user.zip,
+      postalCode: userData.postalCode || user.postalCode,
       isAdmin: userData.isAdmin || user.isAdmin,
       isSeller: userData.isSeller || user.isSeller,
     }
@@ -127,11 +127,11 @@ const ProfileEditScreen = ({history}) => {
               </Form.Group>
 
               <Form.Group as={Col} controlId='zip'>
-                <Form.Label>Zip</Form.Label>
+                <Form.Label>Postal code</Form.Label>
                 <Form.Control
                   type='number'
-                  name='zip'
-                  defaultValue={data.zip}
+                  name='postalCode'
+                  defaultValue={data.postalCode}
                   ref={register}
                 />
               </Form.Group>
@@ -189,12 +189,6 @@ const ProfileEditScreen = ({history}) => {
       </Container>
     </Layout>
   )
-
-  // return (
-  //   <>
-  //     {Object.keys(data).length > 0 ? context : null}
-  //   </>
-  // )
 }
 
 export default ProfileEditScreen

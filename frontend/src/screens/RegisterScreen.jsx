@@ -145,16 +145,16 @@ const RegisterScreen = ({ location, history }) => {
                   )}
                 </Form.Group>
 
-                <Form.Group as={Col} controlId='zip'>
-                  <Form.Label>Zip</Form.Label>
+                <Form.Group as={Col} controlId='postalCode'>
+                  <Form.Label>Post code</Form.Label>
                   <Form.Control
                     type='text'
                     placeholder='Enter postal code'
-                    name='zip'
+                    name='postalCode'
                     ref={register({ required: true, min: 5, max: 5 })}
                     isInvalid={!!errors.zip}
                   />
-                  {errors.zip && (
+                  {errors.postalCode && (
                     <span style={{ color: 'darkred' }}>
                       <FontAwesomeIcon icon={faExclamationTriangle} /> This
                       field is required!
@@ -162,6 +162,23 @@ const RegisterScreen = ({ location, history }) => {
                   )}
                 </Form.Group>
               </Form.Row>
+
+              <Form.Group controlId='country'>
+                <Form.Label>Country</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Enter Country'
+                  name='country'
+                  ref={register({ required: true })}
+                  isInvalid={!!errors.country}
+                />
+                {errors.country && (
+                  <span style={{ color: 'darkred' }}>
+                    <FontAwesomeIcon icon={faExclamationTriangle} /> This field
+                    is required!
+                  </span>
+                )}
+              </Form.Group>
 
               <Button variant='dark' type='submit'>
                 Register
