@@ -53,8 +53,14 @@ exports.deleteCategory = async (req, res) => {
   }
 }
 exports.getAllCategories = async (req, res) => {
+  const keyword = req.query.keyword ? {
+    name: {
+      $regex: req.query.keyword,
+      $options: 'i',
+    },
+  } : {}
   try {
-    const categories = await Category.find()
+    const categories = await Category.find({...keyword})
     res.json(categories)
   } catch (e) {
     res.status(500).json({msg: 'Server error'})

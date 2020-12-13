@@ -22,7 +22,7 @@ const CategoryItem = ({category, success}) => {
 
   const handleUpdate = () => {
     const updatedCategory = {
-      name: categoryName,
+      name: categoryName || category.name,
       _id: category._id
     }
     dispatch(updateCategory(updatedCategory))

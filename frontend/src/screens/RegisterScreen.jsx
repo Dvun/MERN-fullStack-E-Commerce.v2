@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import { registerUser } from '../redux/actions/userActions'
 import * as consts from '../redux/constants/userConstants'
 
+
 const RegisterScreen = ({ location, history }) => {
   const dispatch = useDispatch()
   const { register, handleSubmit, errors } = useForm()
@@ -180,7 +181,7 @@ const RegisterScreen = ({ location, history }) => {
                 )}
               </Form.Group>
 
-              <Button variant='dark' type='submit'>
+              <Button className='mt-3' variant='dark' type='submit'>
                 Register
               </Button>
             </Form>

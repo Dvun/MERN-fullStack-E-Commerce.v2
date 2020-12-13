@@ -4,7 +4,7 @@ import {Button, Container, Table} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import {InputFilter, ModalWindowAdmin} from '../components'
 import {useDispatch, useSelector} from 'react-redux'
-import {USERS_PRODUCTS_BY_ADMIN_RESET} from '../redux/constants/productConstants'
+import {PRODUCT_DETAILS_RESET, USERS_PRODUCTS_BY_ADMIN_RESET} from '../redux/constants/productConstants'
 import {getAllUsersProductsByAdmin} from '../redux/actions/productActions'
 
 
@@ -20,6 +20,7 @@ const ProductsListByAdminScreen = ({history}) => {
       history.push('/login')
     } else {
       dispatch({type: USERS_PRODUCTS_BY_ADMIN_RESET})
+      dispatch({type: PRODUCT_DETAILS_RESET})
       dispatch(getAllUsersProductsByAdmin())
     }
     // eslint-disable-next-line

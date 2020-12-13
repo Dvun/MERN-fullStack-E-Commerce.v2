@@ -15,7 +15,8 @@ import {
   deleteProductByUserReducer,
   createNewProductByUserReducer,
   updateProductByUserReducer,
-  getAllProductsByAdminReducer
+  getAllProductsByAdminReducer,
+  productReviewCreateByUserReducer
 } from './reducers/productReducers'
 import {
   CategoriesReducer,
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   deleteProductByUserReducer,
   updateProductByUserReducer,
   getAllProductsByAdminReducer,
+  productReviewCreateByUserReducer,
 
   CategoriesReducer,
   createNewProductByUserReducer,

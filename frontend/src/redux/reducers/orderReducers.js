@@ -8,7 +8,7 @@ const initialState = {
   shippingAddress: {},
   order: {},
   orders: [],
-  filteredOrders: [],
+  filteredOrders: null,
   success: false,
   orderErrorMessage: null,
   orderSuccessMessage: null,
@@ -116,6 +116,12 @@ export const orderReducers = (state = initialState, action) => {
       return {
         ...state,
         successDeliver: false
+      }
+
+    case consts.ORDER_DETAILS_RESET:
+      return {
+        ...state,
+        order: {}
       }
 
 

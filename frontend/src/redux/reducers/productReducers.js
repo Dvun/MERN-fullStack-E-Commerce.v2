@@ -20,7 +20,7 @@ export const getAllNewArrivedProductsReducer = (state = {newArrivedProducts: []}
 }
 export const getProductDetailsReducer = (state = {product: {}}, action) => {
   switch (action.type) {
-    case consts.PRODUCT_DETAILS_SUCCESS: return {...state, product: action.payload}
+    case consts.PRODUCT_DETAILS_SUCCESS: return {product: action.payload}
     case consts.PRODUCT_DETAILS_FAIL: return {productErrorMessage: action.payload}
     case consts.PRODUCT_DETAILS_RESET: return {product: {}}
     case consts.CLEAR_MESSAGES: return {...state, productErrorMessage: null}
@@ -60,6 +60,15 @@ export const updateProductByUserReducer = (state = {}, action) => {
     case consts.UPDATE_PRODUCT_FAIL: return {productErrorMessage: action.payload, success: false}
     case consts.CREATE_NEW_PRODUCT_RESET: return {success: false}
     case consts.CLEAR_MESSAGES: return {...state, productErrorMessage: null, productSuccessMessage: null}
+    default: return state
+  }
+}
+export const productReviewCreateByUserReducer = (state = {}, action) => {
+  switch (action.type) {
+    case consts.CREATE_PRODUCT_REVIEW_BY_USER_SUCCESS: return {productReviewSuccessMessage: action.payload, reviewSuccess: true}
+    case consts.CREATE_PRODUCT_REVIEW_BY_USER_FAIL: return {productReviewErrorMessage: action.payload, reviewSuccess: false}
+    case consts.CREATE_PRODUCT_REVIEW_BY_USER_RESET: return {reviewSuccess: false}
+    case consts.CLEAR_MESSAGES: return {...state, productReviewSuccessMessage: null, productReviewErrorMessage: null, reviewSuccess: false}
     default: return state
   }
 }

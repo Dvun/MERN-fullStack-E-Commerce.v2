@@ -3,6 +3,7 @@ require('dotenv').config()
 const cors = require('cors')
 const dotenv = require('dotenv')
 const path = require('path')
+const morgan = require('morgan')
 const startDB = require('./config/db')
 const {userRouter, categoryRouter, productRouter, uploadRouter, orderRouter} = require('./routes')
 
@@ -12,6 +13,11 @@ dotenv.config()
 
 // Middlewares
 const app = express()
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
+}
+
 app.use(express.json({extended: true}))
 app.use(express.urlencoded({extended: false}))
 const folder = path.resolve()

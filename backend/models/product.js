@@ -5,6 +5,11 @@ const reviewSchema = new Schema({
   name: {type: String, required: true},
   rating: {type: Number, required: true},
   comment: {type: String, required: true},
+  userId: {
+    type: ObjectId,
+    ref: 'User',
+    required: true
+  },
 }, {timestamps: true
 })
 

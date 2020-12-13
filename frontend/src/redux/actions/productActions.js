@@ -2,10 +2,10 @@ import axios from 'axios'
 import * as consts from '../constants/productConstants'
 
 
-export const getAllProducts = () => async (dispatch) => {
+export const getAllProducts = (keyword = '') => async (dispatch) => {
   dispatch({type: consts.PRODUCTS_REQUEST})
   try {
-    const res = await axios.get('/api/products')
+    const res = await axios.get(`/api/products?keyword=${keyword}`)
     dispatch({type: consts.PRODUCTS_SUCCESS, payload: res.data})
   } catch (e) {
     dispatch({type: consts.PRODUCTS_FAIL, payload: e.response.data})
@@ -51,7 +51,7 @@ export const createNewProductByUser = (productData) => async (dispatch, getState
       {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${getState().userLoginReducer.userInfo.token}`,
-      }
+      },
   }
   try {
     const res = await axios.post(`/api/products/add-product`, productData, config)
@@ -61,16 +61,33 @@ export const createNewProductByUser = (productData) => async (dispatch, getState
   }
 }
 export const updateProductByUser = (productData) => async (dispatch, getState) => {
-  const config = {headers:
+  const config = {
+    headers:
       {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${getState().userLoginReducer.userInfo.token}`
-      }}
+        Authorization: `Bearer ${getState().userLoginReducer.userInfo.token}`,
+      },
+  }
   try {
     const res = await axios.put(`/api/products/product/${productData._id}`, productData, config)
     dispatch({type: consts.UPDATE_PRODUCT_SUCCESS, payload: res.data})
   } catch (e) {
     dispatch({type: consts.UPDATE_PRODUCT_FAIL, payload: e.response.data})
+  }
+}
+export const createProductReviewByUser = (prodId, review) => async (dispatch, getState) => {
+  const config = {
+    headers:
+      {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${getState().userLoginReducer.userInfo.token}`,
+      },
+  }
+  try {
+    const res = await axios.post(`/api/products/review/${prodId}`, review, config)
+    dispatch({type: consts.CREATE_PRODUCT_REVIEW_BY_USER_SUCCESS, payload: res.data})
+  } catch (e) {
+    dispatch({type: consts.CREATE_PRODUCT_REVIEW_BY_USER_FAIL, payload: e.response.data})
   }
 }
 

@@ -21,7 +21,7 @@ const ProfileEditScreen = ({history}) => {
     if (!userInfo) {
       history.push('/login')
     } else {
-      if (!user || !user.name || success) {
+      if (!user || !user.name || success || user.name !== userInfo.name) {
         dispatch({type: USER_UPDATE_RESET})
         dispatch(getUserDetails(userInfo._id))
       } else {
@@ -179,7 +179,7 @@ const ProfileEditScreen = ({history}) => {
               </Form.Row>
             )}
 
-            <Button variant='outline-dark' type='submit'>
+            <Button variant='outline-dark' type='submit' className='mt-3'>
               Update
             </Button>
           </Form>

@@ -10,6 +10,7 @@ import ModalWindowAdmin from './ModalWindowAdmin'
 import CategoryItem from './CategoryItem'
 import InputFilter from './InputFilter'
 import AddCategoryInput from './AddCategoryInput'
+import SearchBox from './SearchBox'
 
 export {
   Header,
@@ -23,5 +24,6 @@ export {
   ModalWindowAdmin,
   CategoryItem,
   InputFilter,
-  AddCategoryInput
+  AddCategoryInput,
+  SearchBox
 }

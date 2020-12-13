@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import Layout from '../helpers/Layout'
 import {useDispatch, useSelector} from 'react-redux'
 import {getAllProducts} from '../redux/actions/productActions'
-import {Products} from '../components'
+import {Products, SearchBox} from '../components'
 import {Container, Row} from 'react-bootstrap'
 
 const ShopListScreen = () => {
@@ -17,10 +17,13 @@ const ShopListScreen = () => {
   return (
     <Layout title='React E-Commerce' description='Best E-Commerce on React'>
       <Container fluid>
+        <SearchBox label='Search product...'/>
         <Row className='justify-content-around' lg={8}>
-          {products && products.map(product => (
-            <Products key={product._id} product={product}/>
-          ))}
+          {
+            products && products.map(product => (
+              <Products key={product._id} product={product}/>
+            ))
+          }
         </Row>
       </Container>
     </Layout>

@@ -13,15 +13,18 @@ const ToastMessages = () => {
   const {userSuccessMessages: deleteUser} = useSelector(({ deleteUserByAdmin }) => deleteUserByAdmin)
   const {productSuccessMessage} = useSelector(({ createNewProductByUserReducer }) => createNewProductByUserReducer)
   const {categoryErrorMessage, categorySuccessMessage} = useSelector(({ CategoriesReducer }) => CategoriesReducer)
+  const {productReviewSuccessMessage, productReviewErrorMessage} = useSelector(({productReviewCreateByUserReducer}) => productReviewCreateByUserReducer)
 
 
   useEffect(() => {
     if (productSuccessMessage && productSuccessMessage.msg) notifySuccess(productSuccessMessage.msg)
     if (successRegister && successRegister.msg) notifySuccess(successRegister.msg)
     if (categorySuccessMessage && categorySuccessMessage.msg) notifySuccess(categorySuccessMessage.msg)
+    if (productReviewSuccessMessage && productReviewSuccessMessage.msg) notifySuccess(productReviewSuccessMessage.msg)
 
 
     if (userErrorMessage && userErrorMessage.msg) notifyError(userErrorMessage.msg)
+    if (productReviewErrorMessage && productReviewErrorMessage.msg) notifyError(productReviewErrorMessage.msg)
     if (categoryErrorMessage && categoryErrorMessage.msg) notifyError(categoryErrorMessage.msg)
     if (errorRegister && errorRegister.msg) notifyError(errorRegister.msg)
     if (deleteUser && deleteUser.msg) notifySuccess(deleteUser.msg)
@@ -37,7 +40,9 @@ const ToastMessages = () => {
     updateSuccess,
     deleteUser,
     categorySuccessMessage,
-    categoryErrorMessage
+    categoryErrorMessage,
+    productReviewSuccessMessage,
+    productReviewErrorMessage
   ])
 
   const notifySuccess = (content) => {

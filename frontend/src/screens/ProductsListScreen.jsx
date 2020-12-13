@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getAllUserProducts} from '../redux/actions/productActions'
 import {faPlusSquare} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {USER_PRODUCTS_RESET} from '../redux/constants/productConstants'
+import {PRODUCT_DETAILS_RESET, USER_PRODUCTS_RESET} from '../redux/constants/productConstants'
 
 
 const ProductsListScreen = () => {
@@ -20,6 +20,7 @@ const ProductsListScreen = () => {
   useEffect(() => {
     if (!userProducts || !userProducts.title) {
       dispatch({type: USER_PRODUCTS_RESET})
+      dispatch({type: PRODUCT_DETAILS_RESET})
       dispatch(getAllUserProducts(userInfo._id))
     }
     // eslint-disable-next-line

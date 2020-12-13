@@ -12,7 +12,8 @@ const {
   createNewProduct,
   getAllProductsByAdmin,
   deleteProductByAdmin,
-  updateProductByAdmin
+  updateProductByAdmin,
+  createProductReview
 } = require('../controllers/productController')
 
 
@@ -33,6 +34,9 @@ router.route('/:id')
 router.route('/product/:id')
   .get(getProductById)
   .put(verifyToken, updateProductByUser)
+
+router.route('/review/:id')
+    .post(verifyToken, createProductReview)
 
 router.route('/sort/:by').get(newCreatedProducts)
 

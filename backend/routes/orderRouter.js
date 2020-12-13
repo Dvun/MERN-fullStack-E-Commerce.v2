@@ -7,7 +7,7 @@ const {
   updateOrderToPaid,
   getMyOrders,
   getAllOrders,
-  deleteOrderByAdmin,
+  // deleteOrderByAdmin,
   updateOrderToDelivered
 } = require('../controllers/orderController')
 
@@ -19,7 +19,7 @@ router.get('/myorders', verifyToken, getMyOrders)
 router.get('/:id', verifyToken, getOrderById)
 router.put('/:id/pay', verifyToken, updateOrderToPaid)
 router.put('/:id/deliver', verifyToken, isAdmin, updateOrderToDelivered)
-router.delete('/order/:id', verifyToken, isAdmin, deleteOrderByAdmin)
+// router.delete('/order/:id', verifyToken, isAdmin, deleteOrderByAdmin)
 
 
 module.exports = router

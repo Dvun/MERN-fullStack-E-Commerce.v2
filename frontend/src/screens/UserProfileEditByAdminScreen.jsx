@@ -157,7 +157,7 @@ const UserProfileEditByAdminScreen = ({history, match}) => {
           </Form.Row>
 
           {userInfo.isAdmin && (
-            <Form.Row>
+            <Form.Row className='d-flex'>
               <Form.Group id='isAdmin' style={{paddingLeft: '5px'}}>
                 <Form.Check
                   type='checkbox'

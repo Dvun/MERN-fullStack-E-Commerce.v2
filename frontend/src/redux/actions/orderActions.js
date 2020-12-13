@@ -51,7 +51,7 @@ export const deliverOrder = (orderId) => async (dispatch, getState) => {
         Authorization: `Bearer ${getState().userLoginReducer.userInfo.token}`
       }
     }
-    const res = await axios.put(`/api/orders/${orderId}/deliver`, config)
+    const res = await axios.put(`/api/orders/${orderId}/deliver`, {}, config)
     dispatch({type: consts.ORDER_DELIVER_SUCCESS, payload: res.data})
   } catch (e) {
     dispatch({type: consts.ORDER_DELIVER_FAIL, payload: e.response.data})
@@ -84,16 +84,16 @@ export const getAllOrdersByAdmin = () => async (dispatch, getState) => {
     dispatch({type: consts.GET_ALL_ORDERS_BY_ADMIN_FAIL, payload: e.response.data})
   }
 }
-export const deleteOrderByAdmin = (id) => async (dispatch, getState) => {
-  try {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${getState().userLoginReducer.userInfo.token}`
-      }
-    }
-    const res = await axios.delete(`/api/orders/order/${id}`, config)
-    dispatch({type: consts.DELETE_ORDER_BY_ADMIN_SUCCESS, payload: res.data})
-  } catch (e) {
-    dispatch({type: consts.DELETE_ORDER_BY_ADMIN_FAIL, payload: e.response.data})
-  }
-}
+// export const deleteOrderByAdmin = (id) => async (dispatch, getState) => {
+//   try {
+//     const config = {
+//       headers: {
+//         Authorization: `Bearer ${getState().userLoginReducer.userInfo.token}`
+//       }
+//     }
+//     const res = await axios.delete(`/api/orders/order/${id}`, config)
+//     dispatch({type: consts.DELETE_ORDER_BY_ADMIN_SUCCESS, payload: res.data})
+//   } catch (e) {
+//     dispatch({type: consts.DELETE_ORDER_BY_ADMIN_FAIL, payload: e.response.data})
+//   }
+// }

@@ -2,9 +2,9 @@ import axios from 'axios'
 import * as consts from '../constants/categoryConstants'
 
 
-export const getAllCategories = () => async (dispatch) => {
+export const getAllCategories = (keyword = '') => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/categories`)
+    const res = await axios.get(`/api/categories?keyword=${keyword}`)
     dispatch({type: consts.GET_ALL_CATEGORIES_SUCCESS, payload: res.data})
   } catch (e) {
     dispatch({type: consts.GET_ALL_CATEGORIES_FAIL, payload: e.response.data})

@@ -7,26 +7,16 @@ require('dotenv').config()
 
 
 exports.getAllProducts = async (req, res) => {
+  const keyword = req.query.keyword ? {
+    title: {
+      $regex: req.query.keyword,
+      $options: 'i',
+    },
+  } : {}
   try {
-    let products = await Product.find().populate('userId')
+    await productsPictureControl()
+    let products = await Product.find({...keyword}).populate('userId')
     if (products) {
-      const folder = path.join(path.resolve(), '/uploads')
-      try {
-        let files = fs.readdirSync(folder)
-        products.map(prod => {
-          files = files.filter(file => !prod.fileName.includes(file))
-        })
-        files.map(file => {
-          fs.unlink(`${folder}/${file}`, (err) => {
-            if (!err) {
-            } else {
-              console.log(err)
-            }
-          })
-        })
-      } catch (e) {
-        console.error(e)
-      }
       res.json(products)
     }
   } catch (e) {
@@ -103,30 +93,40 @@ exports.newCreatedProducts = async (req, res) => {
 exports.updateProductByUser = async (req, res) => {
   await updateProduct(req, res)
 }
+exports.createProductReview = async (req, res) => {
+  const {rating, comment} = req.body
+  try {
+    const product = await Product.findById(req.params.id)
+    if (product) {
+      const alreadyReviewed = await product.reviews.find(review => review.userId.toString() === req.user._id.toString())
+      if (alreadyReviewed) {
+        return res.status(400).json({msg: 'Product already reviewed!'})
+      } else {
+        const review = {
+          name: req.user.name,
+          rating: Number(rating),
+          comment,
+          userId: req.user._id,
+        }
+        product.reviews.push(review)
+        product.numReviews = product.reviews.length
+        product.rating = product.reviews.reduce((acc, item) => item.rating + acc, 0) / product.reviews.length
+        await product.save()
+        res.status(201).json({msg: 'Review added!'})
+      }
+    }
+  } catch (e) {
+    res.status(500).json({msg: 'Server error'})
+  }
+}
 
 
-// Admin
+// Admin controllers
 exports.getAllProductsByAdmin = async (req, res) => {
   try {
+    await productsPictureControl()
     let products = await Product.find().populate('userId').populate('category')
     if (products) {
-      const folder = path.join(path.resolve(), '/uploads')
-      try {
-        let files = fs.readdirSync(folder)
-        products.map(prod => {
-          files = files.filter(file => !prod.fileName.includes(file))
-        })
-        files.map(file => {
-          fs.unlink(`${folder}/${file}`, (err) => {
-            if (!err) {
-            } else {
-              console.log(err)
-            }
-          })
-        })
-      } catch (e) {
-        console.error(e)
-      }
       res.json(products)
     }
   } catch (e) {
@@ -141,6 +141,7 @@ exports.updateProductByAdmin = async (req, res) => {
 }
 
 
+// Functions
 const updateProduct = async (req, res) => {
   try {
     const product = await Product.findByIdAndUpdate(req.body._id, {
@@ -196,5 +197,23 @@ const deleteProduct = async (req, res) => {
     }
   } catch (e) {
     res.status(500).json({msg: 'Server error'})
+  }
+}
+const productsPictureControl = async () => {
+  const pictureControl = await Product.find()
+  if (pictureControl) {
+    const folder = path.join(path.resolve(), '/uploads')
+    let files = fs.readdirSync(folder)
+    pictureControl.map(prod => {
+      files = files.filter(file => !prod.fileName.includes(file))
+    })
+    files.map(file => {
+      fs.unlink(`${folder}/${file}`, (err) => {
+        if (!err) {
+        } else {
+          console.log(err)
+        }
+      })
+    })
   }
 }

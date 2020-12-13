@@ -61,7 +61,7 @@ const Users = ({user}) => {
         <ModalWindow
           size='lg'
           title='User Deleting warning!'
-          text={`You can not delete user ${user.name}, when he/she have a products. First, do something with products!`}
+          text={`You can not delete user ${user.name}, if he/she have a products. First, do something with products!`}
           count={user.productsCount}
           user={user}
           show={show}

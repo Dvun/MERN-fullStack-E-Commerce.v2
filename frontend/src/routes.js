@@ -28,10 +28,11 @@ const Routes = () => {
       <Route path='/login' component={LoginScreen}/>
       <Route path='/register' component={RegisterScreen}/>
       <Route path='/profile' component={ProfileEditScreen}/>
+      <Route path='/shop/search/:keyword' component={ShopListScreen}/>
       <Route path='/shop' component={ShopListScreen} exact/>
       <Route path='/shop/product/:id' component={ProductScreen}/>
       <Route path='/my-products' component={ProductsListScreen} exact/>
-      <Route path='/my-products/add' component={ProductEditScreen} exact/>
+      <Route path='/my-products/add' component={ProductEditScreen}/>
       <Route path='/my-products/:id/edit' component={ProductEditScreen}/>
       <Route path='/cart' component={CartScreen} exact/>
       <Route path='/placeorder' component={PlaceOrderScreen}/>

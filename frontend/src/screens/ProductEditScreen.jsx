@@ -23,7 +23,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {getAllCategories} from '../redux/actions/categoryActions'
 import {getProductDetails, createNewProductByUser, updateProductByUser} from '../redux/actions/productActions'
 import * as consts from '../redux/constants/productConstants'
-import {PRODUCT_DETAILS_RESET} from '../redux/constants/productConstants'
 
 
 const ProductEditScreen = ({history, match}) => {
@@ -46,11 +45,11 @@ const ProductEditScreen = ({history, match}) => {
       dispatch(getAllCategories())
     }
     if (url !== '/my-products/add') {
-      if (!product || !product.title) {
+      if (!product.title || product._id !== match.params.id) {
         dispatch(getProductDetails(match.params.id))
       } else {
         const fetchData = async () => {
-          setData(product)
+          setData(await product)
         }
         fetchData()
       }
@@ -87,14 +86,14 @@ const ProductEditScreen = ({history, match}) => {
           price: productData.price || data.price,
           countInStock: productData.countInStock || data.countInStock,
           picturePath: loadedPicture.path || data.picturePath,
-          fileName: loadedPicture.filename || data.fileName
+          fileName: loadedPicture.filename || data.fileName,
         }
         await dispatch(updateProductByUser(updateProduct))
         if (!success) {
           reset()
           setPreviewImg(null)
           dispatch({type: consts.CREATE_NEW_PRODUCT_RESET})
-          dispatch({type: PRODUCT_DETAILS_RESET})
+          dispatch({type: consts.PRODUCT_DETAILS_RESET})
           history.goBack()
         }
       }
@@ -113,7 +112,7 @@ const ProductEditScreen = ({history, match}) => {
       setLoadedPicture(res.data)
       setUploading(false)
       if (res.data) {
-        dispatch({type: PRODUCT_DETAILS_RESET})
+        dispatch({type: consts.PRODUCT_DETAILS_RESET})
       }
     } catch
       (e) {
@@ -129,12 +128,13 @@ const ProductEditScreen = ({history, match}) => {
   }
 
   const handleBack = () => {
-    dispatch({type: PRODUCT_DETAILS_RESET})
+    dispatch({type: consts.PRODUCT_DETAILS_RESET})
     history.goBack()
   }
 
   return (
-    <Layout title='Product Editor' description='Edit your products! If You need some Category what have no in list, please write to admin@shop.com'>
+    <Layout title='Product Editor'
+            description='Edit your products! If You need some Category what have no in list, please write to admin@shop.com'>
       <Container>
         <Button className='btn btn-light btn-outline-dark' onClick={handleBack}>
           <FontAwesomeIcon icon={faArrowLeft}/> Products list
@@ -324,7 +324,7 @@ const FileButton = styled.label`
   background-color: #007BFF;
   color: white;
   margin-bottom: 0;
-  
+
   &:hover {
     background-color: #1b62a4;
   }

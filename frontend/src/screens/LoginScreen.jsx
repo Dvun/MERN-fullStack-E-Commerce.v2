@@ -61,7 +61,7 @@ const LoginScreen = ({location, history}) => {
                 }
               </FormGroup>
 
-              <Button type='submit' variant='dark'>Sign In</Button>
+              <Button className='mt-3' type='submit' variant='dark'>Sign In</Button>
             </Form>
             <Row className='py-3'>
               <Col>
