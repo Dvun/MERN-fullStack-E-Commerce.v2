@@ -4,7 +4,7 @@ import {CLEAR_FILTER, FILTERING} from '../constants/filterConstants'
 
 export const getAllProductsReducer = (state = {products: []}, action) => {
   switch (action.type) {
-    case consts.PRODUCTS_SUCCESS: return {products: action.payload}
+    case consts.PRODUCTS_SUCCESS: return {products: action.payload.products, pages: action.payload.pages, page: action.payload.page}
     case consts.PRODUCTS_FAIL: return {productErrorMessage: action.payload}
     case consts.CLEAR_MESSAGES: return {...state, productErrorMessage: null}
     default: return state

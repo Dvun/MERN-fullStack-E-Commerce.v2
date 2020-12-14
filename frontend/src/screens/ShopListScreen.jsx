@@ -2,16 +2,17 @@ import React, {useEffect} from 'react'
 import Layout from '../helpers/Layout'
 import {useDispatch, useSelector} from 'react-redux'
 import {getAllProducts} from '../redux/actions/productActions'
-import {Products, SearchBox} from '../components'
+import {Paginate, Products, SearchBox} from '../components'
 import {Container, Row} from 'react-bootstrap'
 
-const ShopListScreen = () => {
+const ShopListScreen = ({match}) => {
   const dispatch = useDispatch()
-  const {products} = useSelector(({getAllProductsReducer}) => getAllProductsReducer)
+  const pageNumber = match.params.pageNumber || 1
+  const {products, page, pages} = useSelector(({getAllProductsReducer}) => getAllProductsReducer)
 
   useEffect(() => {
-    dispatch(getAllProducts())
-  }, [dispatch])
+    dispatch(getAllProducts('', pageNumber))
+  }, [dispatch, pageNumber])
 
 
   return (
@@ -26,6 +27,9 @@ const ShopListScreen = () => {
           }
         </Row>
       </Container>
+      <div className='d-flex justify-content-center mt-5'>
+        <Paginate pages={pages} page={page}/>
+      </div>
     </Layout>
   )
 }

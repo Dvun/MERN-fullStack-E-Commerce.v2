@@ -7,17 +7,20 @@ require('dotenv').config()
 
 
 exports.getAllProducts = async (req, res) => {
+  const pageSize = 6
+  const page = Number(req.query.pageNumber) || 1
   const keyword = req.query.keyword ? {
     title: {
       $regex: req.query.keyword,
       $options: 'i',
     },
   } : {}
+  const count = await Product.countDocuments({...keyword})
   try {
     await productsPictureControl()
-    let products = await Product.find({...keyword}).populate('userId')
+    let products = await Product.find({...keyword}).populate('userId').limit(pageSize).skip(pageSize * (page - 1))
     if (products) {
-      res.json(products)
+      res.json({products, page, pages: Math.ceil(count / pageSize)})
     }
   } catch (e) {
     res.status(500).json({msg: 'Server error'})

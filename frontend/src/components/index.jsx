@@ -11,6 +11,7 @@ import CategoryItem from './CategoryItem'
 import InputFilter from './InputFilter'
 import AddCategoryInput from './AddCategoryInput'
 import SearchBox from './SearchBox'
+import Paginate from './Paginate'
 
 export {
   Header,
@@ -25,5 +26,6 @@ export {
   CategoryItem,
   InputFilter,
   AddCategoryInput,
-  SearchBox
+  SearchBox,
+  Paginate
 }
