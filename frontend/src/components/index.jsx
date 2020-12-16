@@ -12,6 +12,7 @@ import InputFilter from './InputFilter'
 import AddCategoryInput from './AddCategoryInput'
 import SearchBox from './SearchBox'
 import Paginate from './Paginate'
+import Meta from './Meta'
 
 export {
   Header,
@@ -27,5 +28,6 @@ export {
   InputFilter,
   AddCategoryInput,
   SearchBox,
-  Paginate
+  Paginate,
+  Meta
 }
