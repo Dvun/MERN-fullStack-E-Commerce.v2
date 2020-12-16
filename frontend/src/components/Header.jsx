@@ -34,7 +34,7 @@ const Header = () => {
           <Navbar.Brand href="#home">React-Shop</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-        <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar.Collapse id="responsive-navbar-nav" className='d-flex justify-content-between'>
           <Nav className="mr-auto">
             <LinkContainer to="/shop">
               <Nav.Link><FontAwesomeIcon icon={faShopify}/> ShopList</Nav.Link>
@@ -42,7 +42,7 @@ const Header = () => {
           </Nav>
           <Nav>
             {userInfo &&
-            <LinkContainer to="/cart" className='mr-2 position-relative'>
+            <LinkContainer to="/cart" className='position-relative' style={{marginRight: '5px'}}>
               <Nav.Link>
                 <FontAwesomeIcon icon={faShoppingCart}/>
                 <sup>
