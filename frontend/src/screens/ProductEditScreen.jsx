@@ -147,7 +147,9 @@ const ProductEditScreen = ({history, match}) => {
               <Col md={5} className='d-flex py-3 px-4'>
                 <CardImg
                   src={url === '/my-products/add' ? previewImg && previewImg : data && `${window.location.origin}/${data.picturePath}`}
-                  alt='previewImg'/>
+                  alt='previewImg'
+                  style={{maxHeight: '450px'}}
+                />
               </Col>
 
               <Col md={7}>
