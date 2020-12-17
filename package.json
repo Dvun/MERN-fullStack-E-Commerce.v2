@@ -1,12 +1,12 @@
 {
   "name": "mern-online-shop",
   "version": "1.0.0",
-  "description": "",
+  "description": "MERN shopping cart app",
   "engines": {
     "node": "14.x",
     "npm": "6.x"
   },
-  "main": "backend/server.js",
+  "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
@@ -14,9 +14,8 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
-  "keywords": [],
   "author": "Roman Seveljov",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.3.1",
