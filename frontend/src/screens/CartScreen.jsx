@@ -18,12 +18,13 @@ const CartScreen = ({match, location, history}) => {
   const [paymentMethod, setPaymentMethod] = useState('')
   const qty = location.search ? location.search.split('=')[1] : 1
   const {cartItems} = useSelector(({cartReducer}) => cartReducer)
+  const {success} = useSelector(({orderReducers}) => orderReducers)
 
   useEffect(() => {
     if (prodId) {
       dispatch(addToCart(prodId, qty))
     }
-  }, [dispatch, prodId, qty])
+  }, [dispatch, prodId, qty, success])
 
   const removeFromCartHandler = (id) => {
     dispatch(removeItemFromCart(id))

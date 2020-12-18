@@ -57,11 +57,6 @@ const productSchema = new Schema({
     default: 0,
     required: true
   },
-  sold: {
-    type: Number,
-    default: 0,
-    required: true
-  },
   picturePath: {
     type: String,
     required: true,

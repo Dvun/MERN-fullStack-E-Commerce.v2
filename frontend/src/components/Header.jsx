@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Nav, Navbar, Dropdown, Container, NavDropdown, NavItem} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -20,6 +20,10 @@ const Header = () => {
   const dispatch = useDispatch()
   const {userInfo} = useSelector(({userLoginReducer}) => userLoginReducer)
   const {cartItems} = useSelector(({cartReducer}) => cartReducer)
+  const {success} = useSelector(({orderReducers}) => orderReducers)
+
+  useEffect(() => {
+  }, [success])
 
   const logoutHandler = () => {
     dispatch(userLogout())
@@ -48,7 +52,7 @@ const Header = () => {
                 <sup>
                   <small style={{top: '0', right: '-10px'}}
                     className='badge bg-danger rounded-circle text-white d-flex justify-content-center position-absolute'
-                  >{itemsCount}</small>
+                  >{!success ? itemsCount : 0}</small>
                 </sup>
               </Nav.Link>
             </LinkContainer>

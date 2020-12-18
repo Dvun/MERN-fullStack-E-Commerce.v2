@@ -1,5 +1,6 @@
 import axios from 'axios'
 import * as consts from '../constants/orderConstants'
+import {RESET_CART_AFTER_ORDER_PLACEMENT} from '../constants/cartConstants'
 
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -13,6 +14,11 @@ export const createOrder = (order) => async (dispatch, getState) => {
     const res = await axios.post('/api/orders', order, config)
     await dispatch({type: consts.ORDER_CREATE_SUCCESS, payload: res.data})
     await dispatch({type: consts.ORDER_DETAILS_RESET})
+    if (res.data) {
+      localStorage.removeItem('cartItems')
+      dispatch({type: RESET_CART_AFTER_ORDER_PLACEMENT})
+    }
+    await dispatch({type: consts.ORDER_CREATE_RESET})
   } catch (e) {
     dispatch({type: consts.ORDER_CREATE_FAIL, payload: e.response.data})
   }

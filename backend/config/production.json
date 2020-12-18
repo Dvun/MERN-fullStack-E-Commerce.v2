@@ -1,7 +1,0 @@
-{
-  "NODE_ENV": "development",
-  "DATABASE": "mongodb+srv://admin:admin12345@e-commerce-v2.wbhuk.mongodb.net/e-commerce-v2?retryWrites=true&w=majority",
-  "PORT": 5000,
-  "SECRET": "some-very-secret-key",
-  "PAYPAL_CLIENT_ID = ": "Aa_hzAueu_H0yz6Bz71Z5dN1frj9OtVdnURQPjd_efF9gPEinKtyFnsipK-r1euN7dzHXvgLhkCoFHCG"
-}

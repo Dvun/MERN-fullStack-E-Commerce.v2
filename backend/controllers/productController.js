@@ -184,7 +184,6 @@ const deleteProduct = async (req, res) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id).populate('category').populate('userId')
     if (product) {
-      console.log(product)
       const folder = path.join(path.resolve(), '/uploads')
       fs.unlink(`${folder}/${product.fileName}`, (err) => {
         if (!err) {

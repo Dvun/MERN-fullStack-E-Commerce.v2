@@ -97,6 +97,7 @@ export const orderReducers = (state = initialState, action) => {
         isLoading: false,
         successDeliver: false,
         successPay: false,
+        success: false,
         orderErrorMessage: action.payload
       }
 
@@ -122,6 +123,12 @@ export const orderReducers = (state = initialState, action) => {
       return {
         ...state,
         order: {}
+      }
+
+    case consts.ORDER_CREATE_RESET:
+      return {
+        ...state,
+        success: false
       }
 
 
