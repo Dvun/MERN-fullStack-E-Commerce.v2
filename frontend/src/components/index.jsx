@@ -13,6 +13,7 @@ import AddCategoryInput from './AddCategoryInput'
 import SearchBox from './SearchBox'
 import Paginate from './Paginate'
 import Meta from './Meta'
+import InfoPopover from './InfoPopover'
 
 export {
   Header,
@@ -29,5 +30,6 @@ export {
   AddCategoryInput,
   SearchBox,
   Paginate,
-  Meta
+  Meta,
+  InfoPopover
 }

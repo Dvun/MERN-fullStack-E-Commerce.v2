@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getAllNewArrivedProducts} from '../redux/actions/productActions'
 import {Carousel, Container, Image} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-import {Meta} from '../components'
+import {InfoPopover, Meta} from '../components'
 
 
 const HomeScreen = () => {
@@ -21,7 +21,7 @@ const HomeScreen = () => {
 
       <Meta title='Welcome To React E-Commerce'/>
 
-      <Layout title='React E-Commerce' description='Best E-Commerce on React'>
+      <Layout title='React E-Commerce' description='Best E-Commerce on React' style={{position: 'relative', height: '78vh'}}>
         <Container>
           <h1 className='text-center'>New Arrived Products</h1>
           <Carousel pause='hover' className='bg-dark'>
@@ -43,6 +43,7 @@ const HomeScreen = () => {
             }
           </Carousel>
         </Container>
+          <InfoPopover/>
       </Layout>
     </>
   )
