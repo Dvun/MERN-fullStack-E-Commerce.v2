@@ -63,6 +63,9 @@ exports.updateOrderToPaid = async (req, res) => {
         update_time: req.body.update_time,
         email_address: req.body.payer.email_address,
       }
+      for (i = 0; i < orders.orderItems.length; i++) {
+        await Product.findByIdAndUpdate(orders.orderItems[i]._id, {$inc: {countInStock: - orders.orderItems[i].qty}})
+      }
       const updatedOrder = await orders.save()
       res.json(updatedOrder)
     } else {
