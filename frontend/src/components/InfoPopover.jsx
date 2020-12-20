@@ -32,7 +32,7 @@ const InfoPopover = () => {
                 <h4>This is a DEMO React Shop.</h4>
                 <p>
                   <p>You can register as a NEW user for testing. <br/></p>
-                  For testing <strong>ADMIN FUNCTIONS</strong>, login as a admin: <br/>
+                  For testing <strong>ADMIN FUNCTIONS</strong>, login as an admin: <br/>
                   <strong style={{marginRight: '31px'}}>email: </strong> <strong>admin@shop.com</strong> <br/>
                   <strong>password: </strong> <strong>admin12345</strong> <br/>
                 </p>
