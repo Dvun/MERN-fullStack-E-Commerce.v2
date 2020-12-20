@@ -1,5 +1,6 @@
 import React from 'react'
 import './layout.css'
+import {InfoPopover} from '../components'
 
 
 const Layout = ({title = 'Title', description = 'description', className, style, children}) => {
@@ -11,6 +12,8 @@ const Layout = ({title = 'Title', description = 'description', className, style,
       </div>
 
       <div className={className} style={style}>{children}</div>
+
+      <InfoPopover/>
     </>
   )
 }

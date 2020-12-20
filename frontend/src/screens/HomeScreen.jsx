@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getAllNewArrivedProducts} from '../redux/actions/productActions'
 import {Carousel, Container, Image} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-import {InfoPopover, Meta} from '../components'
+import {Meta} from '../components'
 
 
 const HomeScreen = () => {
@@ -43,7 +43,7 @@ const HomeScreen = () => {
             }
           </Carousel>
         </Container>
-          <InfoPopover/>
+
       </Layout>
     </>
   )
