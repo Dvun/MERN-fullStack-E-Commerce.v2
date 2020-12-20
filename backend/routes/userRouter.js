@@ -20,7 +20,7 @@ router.route('/admin').get(verifyToken, isAdmin, getAllUsers)
 
 router.post('/login', loginValidator, validationMiddleware, loginUser)
 
-router.post('/register',registerValidator, validationMiddleware, registerUser)
+router.post('/register', registerValidator, validationMiddleware, registerUser)
 
 router.route('/:id')
   .get(verifyToken, findUserById)

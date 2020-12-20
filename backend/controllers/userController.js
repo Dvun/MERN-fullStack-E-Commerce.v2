@@ -1,8 +1,13 @@
 const User = require('../models/user')
 const {generatedToken} = require('../middlewares/authMiddleware')
+const {validationResult} = require('express-validator')
 
 
 exports.registerUser = async (req, res) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({errors: errors.array()})
+  }
   try {
     const {name, surname, email, password, address, city, postalCode, country} = req.body
     let existUser = await User.findOne({email})

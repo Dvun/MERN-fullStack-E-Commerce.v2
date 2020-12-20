@@ -22,7 +22,7 @@ const validator = {
 
     check('address', 'Address is required!').notEmpty(),
     check('city', 'City is required!').notEmpty(),
-    check('zip', 'PostalCode is required!').notEmpty(),
+    check('postalCode', 'PostalCode is required!').notEmpty().isLength({min: 5, max: 5}),
   ],
 
   loginValidator: [

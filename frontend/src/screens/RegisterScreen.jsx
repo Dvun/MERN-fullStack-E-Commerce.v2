@@ -25,6 +25,7 @@ const RegisterScreen = ({ location, history }) => {
   }, [history, success, dispatch])
 
   const onSubmit = (userData) => {
+    console.log(userData)
     dispatch(registerUser(userData))
   }
 
@@ -36,6 +37,7 @@ const RegisterScreen = ({ location, history }) => {
             <h1 className='mb-2'>Sign Up</h1>
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Form.Row>
+
                 {/* Name Input */}
                 <Form.Group as={Col} controlId='name'>
                   <Form.Label>Name</Form.Label>
@@ -152,13 +154,13 @@ const RegisterScreen = ({ location, history }) => {
                     type='text'
                     placeholder='Enter postal code'
                     name='postalCode'
-                    ref={register({ required: true, min: 5, max: 5 })}
-                    isInvalid={!!errors.zip}
+                    ref={register({ required: true, minLength: 5, maxLength: 5})}
+                    isInvalid={!!errors.postalCode}
                   />
                   {errors.postalCode && (
                     <span style={{ color: 'darkred' }}>
-                      <FontAwesomeIcon icon={faExclamationTriangle} /> This
-                      field is required!
+                      <FontAwesomeIcon icon={faExclamationTriangle} />
+                      This field is required!
                     </span>
                   )}
                 </Form.Group>
