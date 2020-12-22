@@ -66,5 +66,4 @@ const orderSchema = Schema({
   timestamps: true
 })
 
-
 module.exports = model('Order', orderSchema)
